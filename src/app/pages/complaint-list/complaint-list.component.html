@@ -1,0 +1,105 @@
+<div class="row d-flex justify-content-center align-items-center h-100">
+    <!-- ADVERTISERS SERVICE CARD -->
+    <div class="container" style="height: 500px;overflow-x: auto;">
+        <div class="row">
+            <div class="col-3" *ngFor="let item of complaintList;">
+                <div class="card dark">
+                    <img src="https://codingyaar.com/wp-content/uploads/chair-image.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="text-section">
+                            <h5 class="card-title">{{item.complaintTitle}}</h5>
+                            <p class="card-text">{{item.complaintDetails}}</p>
+                        </div>
+                        <div class="cta-section">
+                            <div>{{item.createdDate | date : 'dd-MMM-yy'}}</div>
+                            <a (click)="openModal(item)" class="btn btn-light">Open</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Complaint Details</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <form>
+                <div class="row">
+                    <div class="col-4">
+                        <div data-mdb-input-init class="form-outline ">
+                            <input readonly type="text" name="complaintTitle" [(ngModel)]="complaintObj.userName" class="form-control" />
+                            <label class="form-label" for="form3Example3">Created By</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div data-mdb-input-init class="form-outline ">
+                            <input readonly type="text" name="complaintTitle" [(ngModel)]="complaintObj.parentDepartmentName" class="form-control" />
+                            <label class="form-label" for="form3Example3">Department</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div data-mdb-input-init class="form-outline ">
+                            <input readonly type="text" name="complaintTitle" [(ngModel)]="complaintObj.departName" class="form-control" />
+                            <label class="form-label" for="form3Example3">Sub Department</label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline ">
+                    <input readonly type="text" name="complaintTitle" [(ngModel)]="complaintObj.complaintTitle" class="form-control" />
+                    <label class="form-label" for="form3Example3">Complaint Title</label>
+                </div>
+    
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-3">
+                    <textarea readonly name="complaintDetails" [(ngModel)]="complaintObj.complaintDetails" placeholder="Enter Complaint Details" class="form-control"></textarea>
+                    <label class="form-label" for="form3Example4">Details</label>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-check mb-0">
+                            <input class="form-check-input me-2" name="isAlreadyReportedThis" [(ngModel)]="complaintObj.isAlreadyReportedThis" type="checkbox" value="" id="form2Example3" />
+                            <label class="form-check-label" for="form2Example3">
+                                Have you Already Raised Complaint For this
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div data-mdb-input-init class="form-outline ">
+                            <input type="text" readonly name="oldComplaintNo" [(ngModel)]="complaintObj.oldComplaintNo" class="form-control" placeholder="" readonly />
+                            <label class="form-label" for="form3Example3">Old Ticket No</label>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div data-mdb-input-init class="form-outline ">
+                            <select name="parentDeptId" [(ngModel)]="complaintObj.complaintStatusId" id="" class="form-select">
+                                <option value="">Select </option>
+                                <option *ngFor="let item of statusList" [value]="item.masterId">{{ item.masterName }}</option>
+                            </select>
+                            <label class="form-label" for="form3Example3">Change Status</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="updateComplaint()">Change Status</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
